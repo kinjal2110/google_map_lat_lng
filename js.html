@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    this is test demo
+    <button id="test">Test click</button>
+
+<script>
+
+    document.getElementById('test').addEventListener('click',function () {
+        
+        console.log('hi');
+    
+    let xhr = new XMLHttpRequest();
+    // let param = {name: 'ks', surname:'surya'}; 
+    let param = 'name=abc&surname=surya';
+    console.log(xhr.readyState);        //unsent-0,  sent-1, loading - 3, success-4
+
+
+// for execution
+    xhr.onreadystatechange = function () {  
+    if(xhr.readyState == 4 && xhr.status == 200)    //proper response or not!
+    {
+        let response = JSON.parse(xhr.responseText);
+        // console.log(response);
+        console.log('name: '+response.name);
+        console.log('surname: '+response.surname);
+        document.getElementById('name').innerHTML = response.name;
+    }}
+    xhr.open('POST','http://localhost/googleMap_PHP/demo.php'); // last argument true or false? 
+    xhr.setRequestHeader('content-type','application/x-www-form-urlencoded'); //x-www-form-url
+    xhr.send(JSON.stringify(param));
+    // parse - for reading data, javascript convert in object
+    //stringify - json convert into string
+});
+// diff between innerhtml and innertext
+</script></body>
+</html>
